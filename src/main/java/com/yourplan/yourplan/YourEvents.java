@@ -109,10 +109,10 @@ class Events implements Serializable{
 }
 
 public class YourEvents implements Serializable{
-    private List<Events> listOfEvents;
+    private Events[] listOfEvents;
     public  Scanner scn = new Scanner(System.in);
     private Account existingAccount;
-
+    private int eventCount = 0;
 
     YourEvents(Account existingAccount){
         // Get the events list from the object existingAccount
@@ -132,12 +132,12 @@ public class YourEvents implements Serializable{
 
     public void ShowEvents(){
         // .get(): Returns the element at the specified position in this list.
-        for(int i = 0; i<listOfEvents.size(); i++){
-            System.out.println("Event "+(i+1)+": "+listOfEvents.get(i).getTitle());
-            System.out.println("Start Date: "+listOfEvents.get(i).getStartDate());
-            System.out.println("End Date: "+listOfEvents.get(i).getEndDate());
-            System.out.println("About: "+listOfEvents.get(i).getAbout());
-            System.out.println("Type: "+listOfEvents.get(i).getType());
+        for(int i = 0; i<listOfEvents.length; i++){
+//            System.out.println("Event "+(i+1)+": "+listOfEvents[i].getTitle());
+            System.out.println("Start Date: "+listOfEvents[i].getStartDate());
+            System.out.println("End Date: "+listOfEvents[i].getEndDate());
+            System.out.println("About: "+listOfEvents[i].getAbout());
+            System.out.println("Type: "+listOfEvents[i].getType());
         }
     }
  
@@ -156,36 +156,32 @@ public class YourEvents implements Serializable{
         // Create a new event object
         Events event = new Events(Title, LocalDate.parse(StartDate), LocalDate.parse(EndDate), about, Type);
         // LocalDate.parse: this helps to get the date in the format YYYY-MM-DD
-        listOfEvents.add(event);
+        listOfEvents[eventCount++]=event;
     }
 
     public void RemoveEvent(){
         ShowEvents();
         System.out.println("Please enter the event number you want to remove: ");
-        // System.out.println("Please enter the event title: ");
-        // String Title = scn.nextLine();
-        // for(int i = 0; i<listOfEvents.size(); i++){
-        //     if(listOfEvents.get(i).getTitle() == (Title)){
-        //         listOfEvents.remove(i);
-        //         System.out.println("Event removed successfully.");
-        //         return;
-        //     }
-        // }
         int i = scn.nextInt();
-        if(i<0 || i>listOfEvents.size()){
+        if(i<0 || i>eventCount){
             System.out.println("Invalid event number.");
             return;
         }
-        listOfEvents.remove(i-1);
-        return;
+       RemoveEvent(i);
+
+    }
+    public void RemoveEvent(int i){
+        listOfEvents[i]=null;
+        eventCount--;
+        System.out.println("Event removed successfully.");
     }
 
     public void ModifyEvent(){
         System.out.println("Please enter the event title: ");
         String Title = scn.nextLine();
-        for(int i = 0; i<listOfEvents.size(); i++){
-            if(listOfEvents.get(i).getTitle()== (Title)){
-                listOfEvents.remove(i);
+        for(int i = 0; i<eventCount; i++){
+            if(listOfEvents[i].getTitle()== (Title)){
+                RemoveEvent(i);
                 System.out.println("Please enter the new event title: ");
                 String newTitle = scn.nextLine();
                 System.out.println("Please enter the new start date: ");
@@ -205,8 +201,15 @@ public class YourEvents implements Serializable{
         }
         System.out.println("Event not found.");
     }
-    public void removeEvent(Events event) {
-        listOfEvents.remove(event);
+    public void removeEvent(String Title) {
+
+        for (int i = 0; i < eventCount; i++) {
+            if (listOfEvents[i].getTitle().equals(Title)) {
+                RemoveEvent(i);
+                return;
+            }
+        }
+
     }
 
 }

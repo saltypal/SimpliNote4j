@@ -1,17 +1,20 @@
 package com.yourplan.yourplan;/*
  * This file is completely related to management of the user file. 
  * OpenOption	
-An object that configures how to open or create a file.
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+IN THIS BRANCH, WE WILL BE FOCUSING ON USING ARRAY INSTEAD OF ARRAY LIST.
+EVERY ACCOUTN CAN HOLD 1000 EVENTS. AND THERE ARE 10 ACCOUNTS.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+ *
 The program manages a login interface that deals with account. 
 if account exists, it loads the file.
 it passes that file to the different programs and makes them use that file as source to read and make changes.
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+THE DATA WILL BE WRITTEN INTO A FILE. EACH FILE WILL HAVE THE NAME OF THE ACCOUNT. AND ONE FILE WILL HAVE THE LIST OF ACCOUNTS.
+ONE FILE PER ACCOUNT.
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ok i got a crazy new idea. I will create on java file whihc maintains accounts. 
-for each account it is one object. 
-that one object holds data about the user and his calendar events.
-so i will pass that object through YourEvents and then Put in new info/ remove info/ modify info
 
 This object not only holds my calendar shit, but also my to do list shit which i will be making in the future
 
@@ -64,124 +67,140 @@ class Account{
     private String Username;
     private String PWD;
     // private boolean exist;
-    private List<YourEvents> events;
+    private Events[] events = new Events[1000]; // This is to hold the events of the account. The maximum number of events that can be held is 1000.
 
-    Account(String ObjName, String Username, String PWD){
-        this.ObjName = Username;
-        this.Username = Username;
-        this.PWD = PWD;
-        // No events because when account is created then there is no events.
+        Account(String ObjName, String Username, String PWD){
+            this.ObjName = Username;
+            this.Username = Username;
+            this.PWD = PWD;
+            // No events because when account is created then there is no events.
 
+        }
+        Account(){
+
+        }
+
+        //Getters and Setters
+        String getObjName(){return ObjName;}
+        String getUsername(){return Username;}
+        String getPWD(){return PWD;}
+        Events[] getList(){return events;}
+
+     }
+
+    public class YourAccount implements Serializable{
+      private Account[] AccountList;
+      private  int accountCount = 0;
+        Scanner scn = new Scanner(System.in);
+        YourAccount(){
+          Scanner Scn = new Scanner(System.in); // Initialize Scanner
+            AccountList = new Account[10]; // Load the accounts list
+        }
+
+
+
+
+    public Account[] loadAccounts(Account[] AccountList) {
+        System.out.println("Loading accounts...");
+        System.out.printf("ONLY DUMMY FUNCTION FOR NOW.");
+        AccountList[10] = AccountList[10]; // this is to load the accounts list into the variable.
+        return AccountList; // the fucntion can also return an accounts list.
     }
-    Account(){
 
-    }
-
-    //Getters and Setters
-    String getObjName(){return ObjName;}
-    String getUsername(){return Username;}
-    String getPWD(){return PWD;}
-    List<YourEvents> getList(){return events;}
-    
- }
-
-public class YourAccount implements Serializable{
-  private ArrayList<Account> AccountList;
-    Scanner scn = new Scanner(System.in);
-    YourAccount(){
-      Scanner Scn = new Scanner(System.in); // Initialize Scanner
-        AccountList = new ArrayList<>(); // Load the accounts list
-    }
-
-
-// this is to load the accounts list.
-//    private ArrayList<Account> loadAccounts() {
-//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_FILE))) {
-//            return (ArrayList<Account>) ois.readObject();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("No accounts file found. Creating new accounts list.");
-//            return new ArrayList<>();
-//        } catch (IOException | ClassNotFoundException e) {
-//            System.out.println("Error loading accounts: " + e.getMessage());
-//            return new ArrayList<>();
-//        }
-//    }
-
-    public Account AccountLogin(){
+    public Account AccountLogin() {
+        loadAccounts(AccountList);
         boolean run = true;
-        while(run)
-        System.out.println("Please enter your username: ");
-        String inputName = scn.nextLine();
-        /*
-        Circumstances under which i need to return an error:
-        1. Account doesn't exist
-        2. Account list is itself empty.
+        while (run) {
+            System.out.println("Please enter your username: ");
+            String inputName = scn.nextLine();
+            /*
+            Circumstances under which i need to return an error:
+            1. Account doesn't exist
+            2. Account list is itself empty.
+             */
 
 
-        AccountList.stream(): Converts the AccountList to a stream.
-        .anyMatch(account -> ...): Checks if any element in the stream matches the given predicate.
-        account -> account.getUsername().equals(inputName): The predicate checks if the username of the account is equal to the inputName.
-         */
-        if (AccountList.isEmpty()){
-
-            System.out.printf("No accounts found. Create new account?");
-            CreateAccount();
-            System.out.println("Account Creation successful. Going to main menu.");
-        } else if(AccountList.stream().anyMatch(account -> account.getUsername()!=(inputName))) {
-
-            System.out.printf("No accounts found. Create new account?");
-            CreateAccount();
-            System.out.println("Account Creation successful. Going to main menu.");
-        } else {
-            Account existingAccount = AccountList.stream().filter(account -> account.getUsername().equals(inputName)).findFirst().get();
-            System.out.println("Please enter your password: ");
-            String inputPWD = scn.nextLine();
-            if (existingAccount.getPWD().equals(inputPWD)) {
-                System.out.println("Login successful.");
-                run = false;
-                 return existingAccount;
+            if (AccountList[0] == null) {
+                System.out.printf("No accounts found. Create new account?");
+                CreateAccount();
+                System.out.println("Account Creation successful. Going to main menu.");
+            }
+            Account found = null;
+            for (int i = 0; i < accountCount; i++) {
+                if (AccountList[i] != null && AccountList[i].getUsername().equals(inputName)) {
+                    found = AccountList[i];
+                    break;
+                }
+            }
+            if (found == null) {
+                System.out.println("Account not found. Create new account?");
+                CreateAccount();
+                System.out.println("Account Creation successful. Going to main menu.");
             } else {
-                System.out.println("Incorrect password.");
-                System.out.println("Going to main menu.");
+                System.out.println("Please enter your password: ");
+                String inputPWD = scn.nextLine();
+                if (found.getPWD().equals(inputPWD)) {
+                    System.out.println("Login successful.");
+                    return found;
+                } else {
+                    System.out.println("Incorrect password.");
+                }
                 return null;
             }
+            return null;
         }
         return null;
     }
 
    public void CreateAccount(){
+        if(accountCount == 10){
+            System.out.println("Maximum number of accounts reached. Remove an account to create a new one.");
+        }
         System.out.println("Create New Account: ");
         System.out.println("Please enter your username: ");
         String inputName = scn.nextLine();
         System.out.println("Please enter your password: ");
         String inputPWD = scn.nextLine();
         Account newAccount = new Account(inputName, inputName, inputPWD);
-        AccountList.add(newAccount);
+        AccountList[accountCount++]= newAccount;
         System.out.println("Account Creation successful. Going to main menu.");
         AccountLogin();;
     }
 
     void RemoveAccount(){
+        // binary search to find the account
         System.out.println("Please enter the username of the account you want to remove: ");
         String inputName = scn.nextLine();
-        if (AccountList.stream().anyMatch(account -> account.getUsername().equals(inputName))) {
-            System.out.println("Enter the password of the account you want to remove: ");
-            String inputPWD = scn.nextLine();
-            if (AccountList.stream().anyMatch(account -> account.getPWD().equals(inputPWD))) {
-                    AccountList.remove(AccountList.stream().anyMatch(account -> account.getPWD().equals(inputPWD)));
-                    System.out.println("Account removed successfully.");
-                }else{
-                    System.out.println("Incorrect password. Try again.");
+        for (int i = 0; i < AccountList.length; i++) {
+            if(AccountList[i].getUsername().equals(inputName)) {
+                System.out.println("please enter the password of the account you want to remove: ");
+                String inputPWD = scn.nextLine();
+                boolean run1 = true;
+                while (run1) {
+                    if (AccountList[i].getPWD().equals(inputPWD)) {
+                        AccountList[i] = null;
+                        System.out.println("Account removed.");
+                        accountCount--;
+                        run1 = false;
+
+                    } else {
+                        System.out.println("Incorrect password.");
+
+                    }
                 }
-        } else {
-            System.out.println("Account not found.");
+            }
         }
     }
 
-    ArrayList<Account> GetList(){
-        return AccountList; // this is to return the list of accounts in the entire machine.
+        public void GetList() {
+            for (int i = 0; i < AccountList.length; i++) {
+                if(AccountList[i] != null){
+                    System.out.println("Account Number: "+i+1);
+                    System.out.println(AccountList[i].getUsername());
+                }
+            }
+        }
 
-    }
     
 
 }
