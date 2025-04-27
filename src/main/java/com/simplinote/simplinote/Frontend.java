@@ -8,7 +8,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -161,8 +160,8 @@ public class Frontend {
     private void toggleDarkMode() {
         boolean isDarkMode = DarkMode.isSelected();
         String style = isDarkMode ?
-            "-fx-background-color: #333333; -fx-text-fill: white;" :
-            "-fx-background-color: white; -fx-text-fill: black;";
+                "-fx-background-color: #333333; -fx-text-fill: white;" :
+                "-fx-background-color: white; -fx-text-fill: black;";
 
         // Apply style to parent
         DarkMode.getScene().getRoot().setStyle(style);
@@ -316,8 +315,8 @@ public class Frontend {
             messageLabel.setPadding(new Insets(10));
 
             String style = isUser ?
-                "-fx-background-color: #e3e896; -fx-text-fill: black; -fx-padding: 10; -fx-background-radius: 5;" :
-                "-fx-background-color: #d0802a; -fx-text-fill: white; -fx-padding: 10; -fx-background-radius: 5;";
+                    "-fx-background-color: #e3e896; -fx-text-fill: black; -fx-padding: 10; -fx-background-radius: 5;" :
+                    "-fx-background-color: #d0802a; -fx-text-fill: white; -fx-padding: 10; -fx-background-radius: 5;";
             messageLabel.setStyle(style);
 
             ChatSection.getChildren().add(messageLabel);

@@ -1,29 +1,47 @@
 package com.simplinote.simplinote;
 
-import dev.langchain4j.data.message.*;
-import dev.langchain4j.memory.ChatMemory;
-import dev.langchain4j.memory.chat.MessageWindowChatMemory;
-import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.chat.request.ChatRequest;
-import dev.langchain4j.model.chat.request.ResponseFormat;
-import dev.langchain4j.model.chat.response.ChatResponse;
-import dev.langchain4j.model.ollama.OllamaChatModel;
-import dev.langchain4j.store.memory.chat.ChatMemoryStore;
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
 
-import java.io.FileWriter;
+import dev.langchain4j.data.message.ChatMessage;
+import dev.langchain4j.store.memory.chat.ChatMemoryStore;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import dev.langchain4j.data.message.SystemMessage;
+import dev.langchain4j.data.message.AiMessage;
+import dev.langchain4j.data.message.ChatMessage;
+import dev.langchain4j.data.message.UserMessage;
+import dev.langchain4j.service.MemoryId;
+import dev.langchain4j.store.memory.chat.ChatMemoryStore;
+import java.io.*;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
 import static dev.langchain4j.data.message.ChatMessageDeserializer.messagesFromJson;
 import static dev.langchain4j.data.message.ChatMessageSerializer.messagesToJson;
+
+import dev.langchain4j.store.memory.chat.InMemoryChatMemoryStore;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
 import static org.mapdb.Serializer.STRING;
+import java.util.*;
+import dev.langchain4j.data.message.*;
+import dev.langchain4j.memory.ChatMemory;
+import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.chat.request.ChatRequest;
+import dev.langchain4j.model.chat.request.ResponseFormat;
+import dev.langchain4j.model.chat.response.ChatResponse;
+import dev.langchain4j.model.ollama.OllamaChatModel;
+import static dev.langchain4j.model.chat.request.ResponseFormat.JSON;
 
 public class Backend {
     public static Scanner scn = new Scanner(System.in);

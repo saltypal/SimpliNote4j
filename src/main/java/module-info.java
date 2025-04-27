@@ -1,4 +1,4 @@
-module com.yourplan.yourplan {
+module com.simplinote.simplinote {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
