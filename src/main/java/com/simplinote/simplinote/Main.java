@@ -1,32 +1,29 @@
 package com.simplinote.simplinote;
-// Import necessary JavaFX classes
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * Main class serves as the entry point of the application.
- * It initializes the NoteView and displays the notepad feature.
- */
 public class Main extends Application {
+    private static final double WINDOW_WIDTH = 900;
+    private static final double WINDOW_HEIGHT = 600;
+
     @Override
-    public void start(Stage primaryStage) {
-        // Create an instance of NoteView to load the notepad UI
-        NoteView noteView = new NoteView();
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/simplinote/simplinote/MainView.fxml"));
+        Scene scene = new Scene(loader.load(), WINDOW_WIDTH, WINDOW_HEIGHT);
+        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
 
-        // Create a scene with the root node from NoteView
-        Scene scene = new Scene(noteView.getNotePane(), 800, 600);
-
-        // Set the stage title and scene
-        primaryStage.setTitle("Notepad Feature");
+        // Set application icon
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/icon.png")));
+        primaryStage.setTitle("SimpliNote");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
-    /**
-     * Launches the JavaFX application.
-     */
     public static void main(String[] args) {
         launch(args);
     }

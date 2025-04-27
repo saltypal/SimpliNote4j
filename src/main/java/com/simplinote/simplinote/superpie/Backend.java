@@ -1,34 +1,26 @@
-package com.simplinote.simplinote;
+package com.simplinote.simplinote.superpie;
 
 
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.store.memory.chat.ChatMemoryStore;
-import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
+
 import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.AiMessage;
-import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.UserMessage;
-import dev.langchain4j.service.MemoryId;
-import dev.langchain4j.store.memory.chat.ChatMemoryStore;
+
 import java.io.*;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.List;
 import java.util.Map;
 import static dev.langchain4j.data.message.ChatMessageDeserializer.messagesFromJson;
 import static dev.langchain4j.data.message.ChatMessageSerializer.messagesToJson;
 
-import dev.langchain4j.store.memory.chat.InMemoryChatMemoryStore;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import static org.mapdb.Serializer.STRING;
@@ -41,7 +33,6 @@ import dev.langchain4j.model.chat.request.ChatRequest;
 import dev.langchain4j.model.chat.request.ResponseFormat;
 import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.ollama.OllamaChatModel;
-import static dev.langchain4j.model.chat.request.ResponseFormat.JSON;
 
 public class Backend {
     public static Scanner scn = new Scanner(System.in);
@@ -50,46 +41,46 @@ public class Backend {
     private ResponseFormat ResponseFormat;
     public double temperature;
     private ChatMemory Memory;
-    private Object CurrentChat;
+    public Object CurrentChat;
     private FileWriter PlainChatHistory;
 
-    void SelectModelName() {
-        List<String> availableModels = Arrays.asList("gemma3:4b", "llama3:7b", "mistral:7b"); // Example models
-        System.out.println("Available Models:");
-        for (int i = 0; i < availableModels.size(); i++) {
-            System.out.println((i + 1) + ". " + availableModels.get(i));
-        }
-        System.out.print("Select a model by number: ");
-        int choice;
-        try {
-            choice = Integer.parseInt(scn.nextLine().trim());
-            if (choice < 1 || choice > availableModels.size()) {
-                throw new IllegalArgumentException("Invalid choice.");
-            }
-            this.ModelName = availableModels.get(choice - 1);
-            System.out.println("Selected model: " + this.ModelName);
-        } catch (Exception e) {
-            System.err.println("Invalid input. Using default model: " + this.ModelName);
-        }
-    }
+//    void SelectModelName() {
+//        List<String> availableModels = Arrays.asList("gemma3:4b", "llama3:7b", "mistral:7b"); // Example models
+//        System.out.println("Available Models:");
+//        for (int i = 0; i < availableModels.size(); i++) {
+//            System.out.println((i + 1) + ". " + availableModels.get(i));
+//        }
+//        System.out.print("Select a model by number: ");
+//        int choice;
+//        try {
+//            choice = Integer.parseInt(scn.nextLine().trim());
+//            if (choice < 1 || choice > availableModels.size()) {
+//                throw new IllegalArgumentException("Invalid choice.");
+//            }
+//            this.ModelName = availableModels.get(choice - 1);
+//            System.out.println("Selected model: " + this.ModelName);
+//        } catch (Exception e) {
+//            System.err.println("Invalid input. Using default model: " + this.ModelName);
+//        }
+//    }
 
-    public void SetTemperature(double x) {
-        this.temperature = x;
-    }
-
-    void ToggleJsonResponseFormat() {
-        System.out.print("Do you want JSON response? (yes/no): ");
-        String choice = scn.nextLine().trim().toLowerCase();
-        if (choice.equals("yes")) {
-            this.ResponseFormat = ResponseFormat.JSON;
-            System.out.println("Response format set to JSON.");
-        } else if (choice.equals("no")) {
-            this.ResponseFormat = null; // Plain text response
-            System.out.println("Response format set to plain text.");
-        } else {
-            System.err.println("Invalid input. Keeping current response format.");
-        }
-    }
+//    public void SetTemperature(double x) {
+//        this.temperature = x;
+//    }
+//
+//    void ToggleJsonResponseFormat() {
+//        System.out.print("Do you want JSON response? (yes/no): ");
+//        String choice = scn.nextLine().trim().toLowerCase();
+//        if (choice.equals("yes")) {
+//            this.ResponseFormat = ResponseFormat.JSON;
+//            System.out.println("Response format set to JSON.");
+//        } else if (choice.equals("no")) {
+//            this.ResponseFormat = null; // Plain text response
+//            System.out.println("Response format set to plain text.");
+//        } else {
+//            System.err.println("Invalid input. Keeping current response format.");
+//        }
+//    }
 
 
     void newInit() throws IOException {

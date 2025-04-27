@@ -20,6 +20,9 @@ module com.simplinote.simplinote {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires javafx.media;
     opens com.simplinote.simplinote to javafx.fxml;
     exports com.simplinote.simplinote;
+    exports com.simplinote.simplinote.superpie;
+    opens com.simplinote.simplinote.superpie to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.simplinote.simplinote;
+package com.simplinote.simplinote.superpie;
 
           import javafx.application.Application;
           import javafx.fxml.FXMLLoader;

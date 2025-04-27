@@ -1,0 +1,59 @@
+.sidebar {
+        -fx-background-color: #f0f0f0;
+        -fx-padding: 15;
+        -fx-pref-width: 150;
+        -fx-spacing: 15;
+        -fx-background-radius: 15;
+        -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    }
+
+    .app-icon {
+        -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+        -fx-padding: 0 0 10 0;
+    }
+
+    .feature-button {
+        -fx-background-color: transparent;
+        -fx-padding: 8;
+    }
+
+    .button-circle {
+        -fx-fill: #e6e6fa;
+        -fx-stroke: #9370db;
+        -fx-stroke-width: 2;
+    }
+
+    .feature-button:hover .button-circle {
+        -fx-fill: #9370db;
+    }
+
+    .feature-label {
+        -fx-font-size: 12px;
+    }
+
+    .toolbar {
+        -fx-background-color: #f8f8f8;
+        -fx-padding: 10 20;
+        -fx-border-color: #e0e0e0;
+        -fx-border-width: 0 0 1 0;
+    }
+
+    .action-button {
+        -fx-background-color: #9370db;
+        -fx-text-fill: white;
+        -fx-min-width: 80px;
+        -fx-padding: 8px;
+        -fx-background-radius: 15px;
+        -fx-font-size: 12px;
+    }
+
+    .action-button:hover {
+        -fx-background-color: #7a5cc5;
+    }
+
+    .notepad-area {
+        -fx-background-color: white;
+        -fx-background-radius: 15;
+        -fx-padding: 15;
+        -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.simplinote.simplinote.MainController"
+            stylesheets="@../styles/main.css">
+
+    <top>
+        <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="toolbar">
+            <Button fx:id="saveBtn" text="Save" styleClass="action-button"/>
+            <Button fx:id="loadBtn" text="Load" styleClass="action-button"/>
+            <padding>
+                <Insets right="20"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <VBox styleClass="sidebar" spacing="15">
+                <ImageView fx:id="appIcon" fitWidth="100" fitHeight="100" styleClass="app-icon">
+                    <Image url="@/icon.png"/>
+                </ImageView>
+
+                <VBox alignment="CENTER" spacing="8">
+                    <Button fx:id="calendarBtn" styleClass="feature-button">
+                        <graphic>
+                            <Circle styleClass="button-circle" radius="25"/>
+                        </graphic>
+                    </Button>
+                    <Label text="Calendar" styleClass="feature-label"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8">
+                    <Button fx:id="todoBtn" styleClass="feature-button">
+                        <graphic>
+                            <Circle styleClass="button-circle" radius="25"/>
+                        </graphic>
+                    </Button>
+                    <Label text="To-Do" styleClass="feature-label"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8">
+                    <Button fx:id="timerBtn" styleClass="feature-button">
+                        <graphic>
+                            <Circle styleClass="button-circle" radius="25"/>
+                        </graphic>
+                    </Button>
+                    <Label text="Timer" styleClass="feature-label"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8">
+                    <Button fx:id="aiBtn" styleClass="feature-button">
+                        <graphic>
+                            <Circle styleClass="button-circle" radius="25"/>
+                        </graphic>
+                    </Button>
+                    <Label text="AI Chat" styleClass="feature-label"/>
+                </VBox>
+            </VBox>
+
+            <AnchorPane fx:id="notepadArea" styleClass="notepad-area" HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </center>
+</BorderPane>

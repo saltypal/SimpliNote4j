@@ -1,56 +1,56 @@
 package com.simplinote.simplinote;
 
-
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.TextField;
+import com.simplinote.simplinote.util.FileHandler;
 
-/**
- * NoteController handles user interactions for the notepad feature.
- */
 public class NoteController {
     private AnchorPane noteArea;
+    private FileHandler fileHandler;
 
-    /**
-     * No-argument constructor required by FXMLLoader.
-     */
     public NoteController() {
-        // This constructor is required by FXMLLoader.
+        fileHandler = new FileHandler();
     }
 
-    /**
-     * Initializes the controller with the AnchorPane.
-     *
-     * @param noteArea The AnchorPane acting as the notepad area.
-     */
     public void initialize(AnchorPane noteArea) {
         this.noteArea = noteArea;
-        setupClickToEdit();
+        setupNoteArea();
     }
 
-    /**
-     * Sets up the click-to-edit functionality.
-     * When the user clicks, a new TextField is added at the click location.
-     */
-    private void setupClickToEdit() {
+    private void setupNoteArea() {
         noteArea.setOnMouseClicked(event -> {
-            // Create a new TextField when the user clicks
-            TextField textField = new TextField();
-            textField.promptTextProperty();
-            textField.setStyle("-fx-font-size: 16px; -fx-background-color: transparent; -fx-border-color: black;");
+            TextArea textArea = new TextArea();
+            textArea.setPromptText("Type here...");
+            textArea.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
 
-            // Add the TextField to the AnchorPane
-            noteArea.getChildren().add(textField);
+            textArea.setLayoutX(event.getX());
+            textArea.setLayoutY(event.getY());
 
-            // Position the TextField at the click location
-            textField.setLayoutX(event.getX());
-            textField.setLayoutY(event.getY());
+            textArea.textProperty().addListener((obs, old, newText) -> {
+                textArea.setPrefRowCount(newText.split("\n").length);
+            });
 
-            // Set a preferred width for the TextField
-            textField.setPrefWidth(200);
-
-            // Optionally, focus the TextField so the user can start typing immediately
-            textField.requestFocus();
+            noteArea.getChildren().add(textArea);
+            textArea.requestFocus();
         });
+    }
+
+    public void saveNote() {
+        StringBuilder content = new StringBuilder();
+        noteArea.getChildren().filtered(node -> node instanceof TextArea)
+                .forEach(node -> {
+                    TextArea textArea = (TextArea) node;
+                    content.append(textArea.getText()).append("\n");
+                });
+        fileHandler.saveToFile(content.toString(), noteArea.getScene().getWindow());
+    }
+
+    public void loadNote() {
+        String content = fileHandler.loadFromFile(noteArea.getScene().getWindow());
+        if (content != null) {
+            TextArea textArea = new TextArea(content);
+            textArea.setStyle("-fx-background-color: transparent; -fx-background-insets: 0;");
+            noteArea.getChildren().add(textArea);
+        }
     }
 }
