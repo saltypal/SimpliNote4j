@@ -10,8 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 public class Frontend {
@@ -20,10 +19,9 @@ public class Frontend {
     @FXML private Button SendButton;
     @FXML private Button useImage;
     @FXML private Button usePdf;
-    @FXML private Button useWeb;
     @FXML private SplitMenuButton ModelSelector;
     @FXML private Slider setTemp;
-    @FXML private ListView<String> ChatHistory;
+    @FXML private Button ChatHistory;
     @FXML private ScrollPane chatScrollPane;
     @FXML private VBox ChatSection;
     @FXML private TextArea YourMessages;
@@ -31,6 +29,7 @@ public class Frontend {
     @FXML private RadioButton setJson;
     @FXML private ProgressIndicator Response;
     @FXML private Text name;
+
 
     private Backend SP;
     private String currentImageUrl = null;
@@ -46,16 +45,14 @@ public class Frontend {
             SP.ModelName = "gemma3:4b";
             SP.temperature = 0.7;
             SP.newInit();
-            SP.VogueModel();
 
             // Setup UI components
             setupScrollPane();
             setupModelMenu();
             setupTemperatureSlider();
             setupButtonHandlers();
-
+            setupChatHistoryHandle();
             // Add initial welcome message
-            addMessageToChat("SuperPie: Hello! I'm ready to chat. What can I help you with today?", false);
 
             System.out.println("Frontend initialized successfully");
         } catch (Exception e) {
@@ -67,6 +64,61 @@ public class Frontend {
                 showError("Error initializing SuperPie: " + e.getMessage());
             });
         }
+    }
+
+    @FXML private Button OldChat; // This should match the FXML ID
+
+    private void setupChatHistoryHandle() {
+        if (OldChat == null) {
+            System.err.println("Old Chats button is null. Check FXML connection.");
+            return;
+        }
+
+        OldChat.setOnAction(e -> {
+            // Get chat history
+            Set<String> memoryIds = Backend.SuperPiePersistentMemoryStore.displayList();
+
+            if (memoryIds != null && !memoryIds.isEmpty()) {
+                // Create dialog to display chat history
+                Dialog<String> dialog = new Dialog<>();
+                dialog.setTitle("Chat History");
+                dialog.setHeaderText("Select a previous chat to load");
+
+                // Create list view for the dialog
+                ListView<String> listView = new ListView<>();
+                List<String> sortedIds = new ArrayList<>(memoryIds);
+                Collections.sort(sortedIds);
+                listView.getItems().addAll(sortedIds);
+
+                dialog.getDialogPane().setContent(listView);
+                dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+                // Handle selection
+                dialog.setResultConverter(buttonType -> {
+                    if (buttonType == ButtonType.OK) {
+                        return listView.getSelectionModel().getSelectedItem();
+                    }
+                    return null;
+                });
+
+                // Show dialog and process result
+                dialog.showAndWait().ifPresent(selectedChat -> {
+                    try {
+                        // Clear current chat
+                        ChatSection.getChildren().clear();
+
+                        // Load selected chat
+                        SP.oldInit(selectedChat);
+
+                        addMessageToChat("Loaded chat: " + selectedChat, false);
+                    } catch (IOException ex) {
+                        showError("Failed to load chat: " + ex.getMessage());
+                    }
+                });
+            } else {
+                showError("No previous chats found");
+            }
+        });
     }
 
     private void setupScrollPane() {
@@ -106,7 +158,7 @@ public class Frontend {
     private void setupTemperatureSlider() {
         if (setTemp != null) {
             setTemp.setValue(SP.temperature);
-            setTemp.valueProperty().addListener((obs, oldVal, newVal) -> {
+            setTemp.valueProperty().addListener((_, oldVal, newVal) -> {
                 SP.temperature = newVal.doubleValue();
                 SP.VogueModel();
             });
@@ -159,10 +211,12 @@ public class Frontend {
 
     private void toggleDarkMode() {
         boolean isDarkMode = DarkMode.isSelected();
-        String style = isDarkMode ?
-                "-fx-background-color: #333333; -fx-text-fill: white;" :
-                "-fx-background-color: white; -fx-text-fill: black;";
-
+        String style;
+        if (isDarkMode) {
+            style = "-fx-background-color: #333333; -fx-text-fill: white;";
+        } else {
+            style = "-fx-background-color: white; -fx-text-fill: black;";
+        }
         // Apply style to parent
         DarkMode.getScene().getRoot().setStyle(style);
     }
