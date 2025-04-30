@@ -1,82 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+    <?import javafx.scene.control.*?>
+    <?import javafx.scene.image.*?>
+    <?import javafx.scene.layout.*?>
+    <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simplinote.simplinote.superpie.Frontend">
-         <children>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.simplinote.simplinote.superpie.Frontend">
+        <children>
             <Text id="name" fx:id="name" layoutX="594.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SuperPie" textAlignment="CENTER" wrappingWidth="166.13671875">
-               <font>
-                  <Font name="Corbel" size="31.0" />
-               </font>
+                <font>
+                    <Font name="Corbel" size="31.0" />
+                </font>
             </Text>
             <ImageView fitHeight="80.0" fitWidth="83.0" layoutX="2.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../pie.png" />
-               </image>
+                <image>
+                    <Image url="/images/pie.png" />
+                </image>
             </ImageView>
             <SplitMenuButton fx:id="ModelSelector" layoutX="1107.0" layoutY="112.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" text="Chat Model">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-               <font>
-                  <Font name="Corbel" size="18.0" />
-               </font>
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Action 1" />
+                    <MenuItem mnemonicParsing="false" text="Action 2" />
+                </items>
+                <font>
+                    <Font name="Corbel" size="18.0" />
+                </font>
             </SplitMenuButton>
             <Button fx:id="NewChat" alignment="CENTER" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="New Chat">
-               <font>
-                  <Font name="Corbel" size="28.0" />
-               </font>
+                <font>
+                    <Font name="Corbel" size="28.0" />
+                </font>
             </Button>
             <Slider fx:id="setTemp" layoutX="1107.0" layoutY="264.0" prefHeight="14.0" prefWidth="151.0" />
             <Text layoutX="1117.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temperature" textAlignment="CENTER" wrappingWidth="131.8245849609375">
-               <font>
-                  <Font size="16.0" />
-               </font>
+                <font>
+                    <Font size="16.0" />
+                </font>
             </Text>
             <Button fx:id="useImage" layoutX="1096.0" layoutY="324.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Image">
-               <font>
-                  <Font size="17.0" />
-               </font>
+                <font>
+                    <Font size="17.0" />
+                </font>
             </Button>
             <Button fx:id="usePdf" layoutX="1096.0" layoutY="401.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="PDF">
-               <font>
-                  <Font size="17.0" />
-               </font>
+                <font>
+                    <Font size="17.0" />
+                </font>
             </Button>
             <ProgressIndicator fx:id="Response" layoutX="101.0" layoutY="32.0" prefHeight="41.0" prefWidth="49.0" progress="0.0" />
             <RadioButton fx:id="setJson" layoutX="1126.0" layoutY="182.0" mnemonicParsing="false" text="Respond In JSON" />
             <Button fx:id="Exit" alignment="CENTER" layoutX="1096.0" layoutY="16.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="174.0" text="Exit">
-               <font>
-                  <Font name="Corbel" size="28.0" />
-               </font>
+                <font>
+                    <Font name="Corbel" size="28.0" />
+                </font>
             </Button>
             <ScrollPane fx:id="chatScrollPane" fitToWidth="true" layoutX="202.0" layoutY="61.0" prefHeight="434.0" prefWidth="894.0">
-               <content>
-                  <VBox fx:id="ChatSection" prefWidth="875.0" spacing="10" style="-fx-padding: 10;" />
-               </content>
+                <content>
+                    <VBox fx:id="ChatSection" prefWidth="875.0" spacing="10" style="-fx-padding: 10;" />
+                </content>
             </ScrollPane>
             <Button fx:id="SendButton" layoutX="1044.0" layoutY="503.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="52.0" text="Send" />
             <ToggleButton fx:id="DarkMode" layoutX="4.0" layoutY="99.0" mnemonicParsing="false" text="Dark Mode" />
-      <Button fx:id="OldChat" alignment="CENTER" layoutX="1.0" layoutY="316.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="Old Chats">
-         <font>
-            <Font name="Corbel" size="28.0" />
-         </font>
-      </Button>
-      <TextField fx:id="YourMessages" layoutX="208.0" layoutY="499.0" prefHeight="95.0" prefWidth="826.0" />
-         </children>
-      </AnchorPane>
+            <Button fx:id="OldChat" alignment="CENTER" layoutX="1.0" layoutY="316.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="200.0" text="Old Chats">
+                <font>
+                    <Font name="Corbel" size="28.0" />
+                </font>
+            </Button>
+            <TextField fx:id="YourMessages" layoutX="208.0" layoutY="499.0" prefHeight="95.0" prefWidth="826.0" />
+        </children>
+    </AnchorPane>
