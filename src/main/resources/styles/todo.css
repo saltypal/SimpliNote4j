@@ -1,0 +1,86 @@
+.todo-container {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.task-table {
+    -fx-background-color: transparent;
+}
+
+.task-table .column-header {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+.task-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -background-light transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.task-table .table-row-cell:selected {
+    -fx-background-color: derive(-primary-color, 90%);
+}
+
+.todo-button-box {
+    -fx-padding: 10;
+}
+
+.todo-button {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-min-width: 100px;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+}
+
+.todo-button:hover {
+    -fx-background-color: -primary-light;
+}
+
+.todo-button-delete {
+    -fx-background-color: -secondary-color;
+    -fx-text-fill: white;
+    -fx-min-width: 100px;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+}
+
+.todo-button-delete:hover {
+    -fx-background-color: derive(-secondary-color, -10%);
+}
+
+.completed-task {
+    -fx-opacity: 0.7;
+    -fx-strikethrough: true;
+}
+
+.task-table .table-row-cell:completed {
+    -fx-background-color: derive(-background-light, 20%);
+}
+
+/* Add hover effect for table rows */
+.task-table .table-row-cell:hover {
+    -fx-background-color: derive(-primary-color, 90%);
+}
+
+/* Style for selected rows */
+.task-table .table-row-cell:selected {
+    -fx-background-color: derive(-primary-color, 80%);
+}
+
+/* Priority colors */
+.priority-high {
+    -fx-text-fill: #ff4444;
+}
+
+.priority-medium {
+    -fx-text-fill: #ffbb33;
+}
+
+.priority-low {
+    -fx-text-fill: #00C851;
+}
