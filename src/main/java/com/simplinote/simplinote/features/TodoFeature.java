@@ -1,16 +1,22 @@
-// src/main/java/com/note/simplinote/features/TodoFeature.java
 package com.simplinote.simplinote.features;
 
-import javafx.scene.control.Alert;
+import com.simplinote.simplinote.components.TodoListComponent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class TodoFeature {
     public void show(Stage parentStage) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Todo List");
-        alert.setHeaderText("Todo List Feature");
-        alert.setContentText("it is a part of calendar!");
-        alert.initOwner(parentStage);
-        alert.showAndWait();
+        Stage todoStage = new Stage();
+        todoStage.initModality(Modality.WINDOW_MODAL);
+        todoStage.initOwner(parentStage);
+        todoStage.setTitle("Todo List");
+
+        TodoListComponent todoList = new TodoListComponent();
+        Scene scene = new Scene(todoList, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/styles/todo.css").toExternalForm());
+
+        todoStage.setScene(scene);
+        todoStage.show();
     }
 }

@@ -1,6 +1,5 @@
 package com.simplinote.simplinote;
 
-import com.simplinote.simplinote.NoteController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
@@ -19,7 +18,7 @@ public class NoteView {
     public NoteView() {
         try {
             // Load the FXML file using FXMLLoader
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/simplinote/simplinote/NoteView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NoteView.fxml"));
             notePane = loader.load();
 
             // Get the controller and initialize it with the AnchorPane

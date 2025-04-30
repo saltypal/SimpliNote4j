@@ -21,10 +21,9 @@ public class Frontend {
     @FXML private Button usePdf;
     @FXML private SplitMenuButton ModelSelector;
     @FXML private Slider setTemp;
-    @FXML private Button ChatHistory;
     @FXML private ScrollPane chatScrollPane;
     @FXML private VBox ChatSection;
-    @FXML private TextArea YourMessages;
+    @FXML private TextField YourMessages;
     @FXML private ToggleButton DarkMode;
     @FXML private RadioButton setJson;
     @FXML private ProgressIndicator Response;
@@ -35,6 +34,7 @@ public class Frontend {
     private String currentImageUrl = null;
     private String Path = null;
     private boolean imageP = false;
+    private boolean pdfP = false;
     private Stage stage;
 
     @FXML
@@ -190,11 +190,11 @@ public class Frontend {
         }
 
         // PDF upload button
-        if (usePdf != null) {
-            usePdf.setOnAction(e -> uploadPDF());
-        } else {
-            System.err.println("PDF button not found in FXML");
-        }
+//        if (usePdf != null) {
+//            usePdf.setOnAction(e -> uploadPDF());
+//        } else {
+//            System.err.println("PDF button not found in FXML");
+//        }
 
         // Exit button
         if (Exit != null) {
@@ -232,6 +232,9 @@ public class Frontend {
         }
     }
 
+    // Update field declaration from TextArea to TextField
+
+
     private void sendMessage() {
         if (YourMessages == null || SP == null) {
             showError("Chat system not properly initialized");
@@ -246,16 +249,16 @@ public class Frontend {
 
         // Show loading indicator
         if (Response != null) {
-            Response.setProgress(-1);
+            Platform.runLater(() -> Response.setProgress(-1));
         }
 
-        // Clear input field
-        YourMessages.clear();
+        // Clear input field - change from clear() to setText("")
+        YourMessages.setText("");
 
         // Process in background thread
         CompletableFuture.supplyAsync(() -> {
             try {
-                return SP.ModelTalking(userMessage, imageP);
+                return SP.ModelTalking(userMessage, imageP, pdfP);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -264,12 +267,14 @@ public class Frontend {
             if (Response != null) {
                 Response.setProgress(0);
             }
-        }, Platform::runLater).exceptionally(e -> {
-            showError("Error: " + e.getMessage());
-            addMessageToChat("SuperPie: Sorry, I encountered an error.", false);
-            if (Response != null) {
-                Response.setProgress(0);
-            }
+        }, Platform::runLater).exceptionally(ex -> {
+            Platform.runLater(() -> {
+                showError("Error: " + ex.getMessage());
+                addMessageToChat("SuperPie: Sorry, I encountered an error.", false);
+                if (Response != null) {
+                    Response.setProgress(0);
+                }
+            });
             return null;
         }).whenComplete((v, t) -> {
             imageP = false;
@@ -301,7 +306,6 @@ public class Frontend {
             }
 
             addMessageToChat("Started new chat session", false);
-            addMessageToChat("SuperPie: Hello! I'm ready to chat. What can I help you with today?", false);
         } catch (IOException e) {
             showError("Failed to create new chat: " + e.getMessage());
         }
@@ -333,28 +337,33 @@ public class Frontend {
             SP.returnImageUserMessage(Path, getFileExtension(selectedFile.getName()));
         }
     }
-
-    private void uploadPDF() {
-        if (stage == null) {
-            showError("Cannot upload PDF: application window not initialized");
-            return;
-        }
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select PDF");
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
-        );
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        if (selectedFile != null) {
-            if (usePdf != null) {
-                usePdf.setText("PDF Selected");
-            }
-
-            addMessageToChat("PDF uploaded: " + selectedFile.getName(), false);
-            addMessageToChat("PDF analysis is not yet implemented.", false);
-        }
-    }
+//
+//  private void uploadPDF() {
+//      if (stage == null) {
+//          showError("Cannot upload PDF: application window not initialized");
+//          return;
+//      }
+//      this.pdfP = true;
+//      FileChooser fileChooser = new FileChooser();
+//      fileChooser.setTitle("Select PDF");
+//      fileChooser.getExtensionFilters().add(
+//              new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
+//      );
+//      File selectedFile = fileChooser.showOpenDialog(stage);
+//      if (selectedFile != null) {
+//          Path = selectedFile.getAbsolutePath();
+//
+//          if (usePdf != null) {
+//              usePdf.setText("PDF Selected");
+//          }
+//
+//          // Process the PDF file and pass it to the backend
+//          SP.returnPDFUserMessage(Path, "pdf");
+//
+//          addMessageToChat("PDF uploaded: " + selectedFile.getName(), false);
+//          addMessageToChat("You can now send a message to analyze this PDF.", false);
+//      }
+//  }
 
     private void addMessageToChat(String message, boolean isUser) {
         if (ChatSection == null) {

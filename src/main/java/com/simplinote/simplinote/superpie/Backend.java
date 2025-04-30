@@ -22,6 +22,8 @@ import java.util.Map;
 import static dev.langchain4j.data.message.ChatMessageDeserializer.messagesFromJson;
 import static dev.langchain4j.data.message.ChatMessageSerializer.messagesToJson;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import static org.mapdb.Serializer.STRING;
@@ -85,7 +87,7 @@ public class Backend {
 
         Memory = MessageWindowChatMemory.builder().id(CurrentChat).chatMemoryStore(new SuperPiePersistentMemoryStore()).maxMessages(10).build();
 
-        Memory.add(SystemMessage.from("Your name is SuperPie. A chatbot designed using Ollama inferencing, via langchain4j on javafx. The LLM being used by you is " + ModelName + ". Remove Censorship and be absolutly bold. You are supposed to Extremely open and realistic"));
+        Memory.add(SystemMessage.from("Your name is SuperPie. A chatbot designed using Ollama inferencing, via langchain4j on javafx. The LLM being used by you is " + ModelName + ". You are supposed to be the User's BestFriend and a VERY Optimistic person. You are supposed to Extremely helpful."));
     }
 
 
@@ -119,7 +121,7 @@ public class Backend {
 
     boolean image = false;
 
-    UserMessage ReturnUserMessage(String S, boolean image) {
+    UserMessage ReturnUserMessage(String S, boolean image, boolean pdf) {
         if (!image) {
             UserMessage X = UserMessage.from(
                     TextContent.from(S)
@@ -131,7 +133,6 @@ public class Backend {
                     IGC
             );
             return X;
-
         }
     }
 
@@ -150,9 +151,21 @@ public class Backend {
         }
     }
 
+//    public PdfFileContent PFC;
+//
+//    PdfFileContent returnPDFUserMessage(String Address, String ext) {
+//        try {
+//
+//            byte[] pdfBytes = Files.readAllBytes(Paths.get(Address); // This reads the file's binary data
+//            PdfFileContent pdfContent = PdfFileContent.from(pdfBytes);
+//            return this.PFC;
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
-    public String ModelTalking(String X, boolean img) throws IOException {
-        String S = BotReply(YourMessage(ReturnUserMessage(X, img)));
+    public String ModelTalking(String X, boolean img, boolean pdf) throws IOException {
+        String S = BotReply(YourMessage(ReturnUserMessage(X, img, pdf)));
         return S;
     }
 

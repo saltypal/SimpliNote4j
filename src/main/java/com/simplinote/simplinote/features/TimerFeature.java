@@ -9,7 +9,7 @@ public class TimerFeature {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Pomodoro Timer");
         alert.setHeaderText("Timer Feature");
-        alert.setContentText("it is a part of calendar!");
+        alert.setContentText("Pomodoro timer feature coming soon!");
         alert.initOwner(parentStage);
         alert.showAndWait();
     }

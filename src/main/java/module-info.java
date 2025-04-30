@@ -21,6 +21,7 @@ module com.simplinote.simplinote {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires javafx.media;
+    requires org.apache.pdfbox;
     opens com.simplinote.simplinote to javafx.fxml;
     exports com.simplinote.simplinote;
     exports com.simplinote.simplinote.superpie;
