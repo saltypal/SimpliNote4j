@@ -1,91 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-                        <?import javafx.scene.layout.*?>
-                        <?import javafx.scene.control.*?>
-                        <?import javafx.scene.image.*?>
-                        <?import javafx.geometry.Insets?>
+                    <?import javafx.scene.layout.*?>
+                    <?import javafx.scene.control.*?>
+                    <?import javafx.scene.image.*?>
+                    <?import javafx.geometry.Insets?>
 
-                        <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-                                    fx:controller="com.simplinote.simplinote.MainController"
-                                    stylesheets="@/styles/main.css">
+                    <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+                                fx:controller="com.simplinote.simplinote.MainController">
 
-                            <center>
-                                <HBox spacing="10">
-                                    <padding>
-                                        <Insets top="10" right="10" bottom="10" left="10"/>
-                                    </padding>
+                        <center>
+                            <HBox spacing="10">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
 
-                                    <!-- Left Sidebar -->
-                                    <VBox styleClass="sidebar" spacing="15">
-                                        <!-- App Icon -->
-                                        <HBox alignment="CENTER_LEFT" styleClass="app-header">
-                                            <ImageView fx:id="appIcon" fitWidth="40" fitHeight="40" styleClass="app-icon">
-                                                <Image url="@/images/icon.png"/>
-                                            </ImageView>
-                                        </HBox>
+                                <!-- Left Sidebar -->
+                                <VBox styleClass="sidebar" spacing="15">
+                                    <!-- App Icon -->
+                                    <HBox alignment="CENTER_LEFT" styleClass="app-header">
+                                        <ImageView fx:id="appIcon" fitWidth="40" fitHeight="40" styleClass="app-icon">
+                                            <Image url="@../../../images/icon.png"/>
+                                        </ImageView>
+                                    </HBox>
 
-                                        <!-- Feature Buttons -->
-                                        <VBox alignment="CENTER" spacing="8">
-                                            <Button fx:id="calendarBtn" styleClass="feature-button">
-                                                <graphic>
-                                                    <ImageView fitWidth="30" fitHeight="30">
-                                                        <Image url="@/images/calendar.png"/>
-                                                    </ImageView>
-                                                </graphic>
-                                            </Button>
-                                            <Label text="Calendar" styleClass="feature-label"/>
-                                        </VBox>
-
-                                        <VBox alignment="CENTER" spacing="8">
-                                            <Button fx:id="todoBtn" styleClass="feature-button">
-                                                <graphic>
-                                                    <ImageView fitWidth="30" fitHeight="30">
-                                                        <Image url="@/images/todo.png"/>
-                                                    </ImageView>
-                                                </graphic>
-                                            </Button>
-                                            <Label text="To-Do" styleClass="feature-label"/>
-                                        </VBox>
-
-                                        <VBox alignment="CENTER" spacing="8">
-                                            <Button fx:id="timerBtn" styleClass="feature-button">
-                                                <graphic>
-                                                    <ImageView fitWidth="30" fitHeight="30">
-                                                        <Image url="@/images/timer.png"/>
-                                                    </ImageView>
-                                                </graphic>
-                                            </Button>
-                                            <Label text="Timer" styleClass="feature-label"/>
-                                        </VBox>
-
-                                        <VBox alignment="CENTER" spacing="8">
-                                            <Button fx:id="aiBtn" styleClass="feature-button">
-                                                <graphic>
-                                                    <ImageView fitWidth="30" fitHeight="30">
-                                                        <Image url="@/images/ai.png"/>
-                                                    </ImageView>
-                                                </graphic>
-                                            </Button>
-                                            <Label text="AI Chat" styleClass="feature-label"/>
-                                        </VBox>
+                                    <!-- Feature Buttons -->
+                                    <VBox alignment="CENTER" spacing="8">
+                                        <Button fx:id="calendarBtn" styleClass="feature-button">
+                                            <graphic>
+                                                <ImageView fitWidth="30" fitHeight="30">
+                                                    <Image url="@../../../images/calendar.png"/>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label text="Calendar" styleClass="feature-label"/>
                                     </VBox>
 
-                                    <!-- Notepad Area -->
-                                    <VBox HBox.hgrow="ALWAYS" spacing="10" styleClass="notepad-container">
-                                        <!-- Notepad Controls -->
-                                        <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="notepad-controls">
-                                            <Button fx:id="saveBtn" text="Save" styleClass="action-button"/>
-                                            <Button fx:id="loadBtn" text="Load" styleClass="action-button"/>
-                                        </HBox>
-
-                                        <!-- Notepad Area with Placeholder -->
-                                        <StackPane VBox.vgrow="ALWAYS" styleClass="notepad-area">
-                                            <Label fx:id="placeholderText"
-                                                   text="Got an idea? Just click and type..."
-                                                   styleClass="placeholder-text"/>
-                                            <AnchorPane fx:id="notepadArea"/>
-                                        </StackPane>
+                                    <VBox alignment="CENTER" spacing="8">
+                                        <Button fx:id="todoBtn" styleClass="feature-button">
+                                            <graphic>
+                                                <ImageView fitWidth="30" fitHeight="30">
+                                                    <Image url="@../../../images/todo.png"/>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label text="To-Do" styleClass="feature-label"/>
                                     </VBox>
-                                </HBox>
-                            </center>
-                        </BorderPane>
+
+                                    <VBox alignment="CENTER" spacing="8">
+                                        <Button fx:id="timerBtn" styleClass="feature-button">
+                                            <graphic>
+                                                <ImageView fitWidth="30" fitHeight="30">
+                                                    <Image url="@../../../images/timer.png"/>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label text="Timer" styleClass="feature-label"/>
+                                    </VBox>
+
+                                    <VBox alignment="CENTER" spacing="8">
+                                        <Button fx:id="aiBtn" styleClass="feature-button">
+                                            <graphic>
+                                                <ImageView fitWidth="30" fitHeight="30">
+                                                    <Image url="@../../../images/ai.png"/>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label text="AI Chat" styleClass="feature-label"/>
+                                    </VBox>
+                                </VBox>
+
+                                <!-- Notepad Area -->
+                                <VBox HBox.hgrow="ALWAYS" spacing="10" styleClass="notepad-container">
+                                    <!-- Notepad Controls -->
+                                    <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="notepad-controls">
+                                        <Button fx:id="saveBtn" text="Save" styleClass="action-button"/>
+                                        <Button fx:id="loadBtn" text="Load" styleClass="action-button"/>
+                                    </HBox>
+
+                                    <!-- Notepad Area with Placeholder -->
+                                    <StackPane VBox.vgrow="ALWAYS" styleClass="notepad-area">
+                                        <Label fx:id="placeholderText"
+                                               text="Got an idea? Just click and type..."
+                                               styleClass="placeholder-text"/>
+                                        <AnchorPane fx:id="notepadArea"/>
+                                    </StackPane>
+                                </VBox>
+                            </HBox>
+                        </center>
+                    </BorderPane>

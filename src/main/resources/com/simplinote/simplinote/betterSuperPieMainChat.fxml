@@ -14,7 +14,7 @@
             </Text>
             <ImageView fitHeight="80.0" fitWidth="83.0" layoutX="2.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="/images/pie.png" />
+                    <Image url="@images/pie.png" />
                 </image>
             </ImageView>
             <SplitMenuButton fx:id="ModelSelector" layoutX="1107.0" layoutY="112.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="151.0" text="Chat Model">
