@@ -20,7 +20,7 @@ package com.simplinote.simplinote.superpie;
               public void start(Stage stage) {
                   try {
                       // Create the FXMLLoader with proper resource path
-                      FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/simplinote/simplinote/betterSuperPieMainChat.fxml"));
+                      FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/betterSuperPieMainChat.fxml"));
 
                       // Load the FXML file
                       Parent root = loader.load();

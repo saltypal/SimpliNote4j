@@ -200,6 +200,16 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.openjfx</groupId>-->
+<!--      <artifactId>javafx-controls</artifactId>-->
+<!--      <version>17.0.2</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.openjfx</groupId>-->
+<!--      <artifactId>javafx-fxml</artifactId>-->
+<!--      <version>17.0.2</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-core</artifactId>
@@ -313,6 +323,7 @@
           <target>23</target>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>

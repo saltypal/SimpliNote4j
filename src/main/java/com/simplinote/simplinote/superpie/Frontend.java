@@ -1,17 +1,35 @@
 package com.simplinote.simplinote.superpie;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
+import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
 
 public class Frontend {
     @FXML private Button NewChat;
@@ -220,17 +238,20 @@ public class Frontend {
         // Apply style to parent
         DarkMode.getScene().getRoot().setStyle(style);
     }
+// In src/main/java/com/simplinote/simplinote/superpie/Frontend.java
+private void exitApplication() {
 
-    private void exitApplication() {
-        if (SP != null) {
-            SP.quit();
-        }
-        if (stage != null) {
-            stage.close();
-        } else {
-            Platform.exit();
-        }
+
+        SP.quit();
+
+
+    // Close the stage or exit the Platform.
+    if (stage != null) {
+        stage.close();
+    } else {
+        Platform.exit();
     }
+}
 
     // Update field declaration from TextArea to TextField
 
@@ -312,11 +333,14 @@ public class Frontend {
     }
 
     private void uploadImage() {
+        // Try to auto-initialize stage if not set
+        if (stage == null && useImage != null && useImage.getScene() != null) {
+            stage = (Stage) useImage.getScene().getWindow();
+        }
         if (stage == null) {
             showError("Cannot upload image: application window not initialized");
             return;
         }
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         fileChooser.getExtensionFilters().addAll(
@@ -337,33 +361,6 @@ public class Frontend {
             SP.returnImageUserMessage(Path, getFileExtension(selectedFile.getName()));
         }
     }
-//
-//  private void uploadPDF() {
-//      if (stage == null) {
-//          showError("Cannot upload PDF: application window not initialized");
-//          return;
-//      }
-//      this.pdfP = true;
-//      FileChooser fileChooser = new FileChooser();
-//      fileChooser.setTitle("Select PDF");
-//      fileChooser.getExtensionFilters().add(
-//              new FileChooser.ExtensionFilter("PDF Files", "*.pdf")
-//      );
-//      File selectedFile = fileChooser.showOpenDialog(stage);
-//      if (selectedFile != null) {
-//          Path = selectedFile.getAbsolutePath();
-//
-//          if (usePdf != null) {
-//              usePdf.setText("PDF Selected");
-//          }
-//
-//          // Process the PDF file and pass it to the backend
-//          SP.returnPDFUserMessage(Path, "pdf");
-//
-//          addMessageToChat("PDF uploaded: " + selectedFile.getName(), false);
-//          addMessageToChat("You can now send a message to analyze this PDF.", false);
-//      }
-//  }
 
     private void addMessageToChat(String message, boolean isUser) {
         if (ChatSection == null) {
@@ -410,6 +407,8 @@ public class Frontend {
     }
 
     public void setStage(Stage stage) {
+        stage.setMaximized(true);
         this.stage = stage;
+        
     }
 }

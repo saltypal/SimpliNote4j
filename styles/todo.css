@@ -1,0 +1,161 @@
+.todo-container {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.task-table {
+    -fx-background-color: transparent;
+}
+
+.task-table .column-header {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.task-table .table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.task-table .table-row-cell:selected {
+    -fx-background-color: derive(-primary-color, 90%);
+}
+
+.todo-toolbar {
+    -fx-background-color: -background-light;
+    -fx-background-radius: 5;
+}
+
+.add-button {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+}
+
+.edit-button {
+    -fx-background-color: #FFA726;
+    -fx-text-fill: white;
+}
+
+.delete-button {
+    -fx-background-color: #EF5350;
+    -fx-text-fill: white;
+}
+
+.complete-button {
+    -fx-background-color: #66BB6A;
+    -fx-text-fill: white;
+}
+
+.todo-button-box {
+    -fx-padding: 10;
+}
+
+.todo-button {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-min-width: 100px;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+}
+
+.todo-button:hover {
+    -fx-background-color: -primary-light;
+}
+
+.todo-button-delete {
+    -fx-background-color: -secondary-color;
+    -fx-text-fill: white;
+    -fx-min-width: 100px;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+}
+
+.todo-button-delete:hover {
+    -fx-background-color: derive(-secondary-color, -10%);
+}
+
+.completed-task {
+    -fx-opacity: 0.7;
+    -fx-strikethrough: true;
+}
+
+.task-table .table-row-cell:completed {
+    -fx-background-color: derive(-background-light, 20%);
+}
+
+/* Add hover effect for table rows */
+.task-table .table-row-cell:hover {
+    -fx-background-color: derive(-primary-color, 90%);
+}
+
+/* Style for selected rows */
+.task-table .table-row-cell:selected {
+    -fx-background-color: derive(-primary-color, 80%);
+}
+
+/* Priority colors */
+.priority-high {
+    -fx-text-fill: #ff4444;
+}
+
+.priority-medium {
+    -fx-text-fill: #ffbb33;
+}
+
+.priority-low {
+    -fx-text-fill: #00C851;
+}
+
+.todo-toolbar {
+    -fx-background-color: -background-light;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+}
+
+.todo-button {
+    -fx-padding: 8 15;
+    -fx-font-size: 13px;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.add-button {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: #724c4c;
+}
+
+.add-button:hover {
+    -fx-background-color: derive(-primary-color, 20%);
+}
+
+.edit-button {
+    -fx-background-color: #FFA726;
+    -fx-text-fill: white;
+}
+
+.edit-button:hover {
+    -fx-background-color: derive(#FFA726, 20%);
+}
+
+.delete-button {
+    -fx-background-color: #EF5350;
+    -fx-text-fill: white;
+}
+
+.delete-button:hover {
+    -fx-background-color: derive(#EF5350, 20%);
+}
+
+.complete-button {
+    -fx-background-color: #66BB6A;
+    -fx-text-fill: white;
+}
+
+.complete-button:hover {
+    -fx-background-color: derive(#66BB6A, 20%);
+}
+
+.table-row-cell:completed {
+    -fx-opacity: 0.7;
+}
