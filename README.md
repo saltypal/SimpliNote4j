@@ -1,13 +1,188 @@
-SimpliNote is your One-Stop productivity solution.
+# 🌟 SimpliNote4j
 
+Hello there! 👋 This is **SimpliNote4j**, a friendly Java application with two super-cool parts:
+
+1. **Local AI Chatbot** – talk to an AI right on your computer  
+2. **SimpliNote Productivity App** – make to-do lists, calendars, timers, and smart notes  
+
+Everything runs on your own machine. No secrets go to the cloud. Let’s dive in!
+
+---
+
+## 📖 Table of Contents
+
+1. [Why SimpliNote4j?](#why-simplinote4j)  
+2. [Part 1: Local AI Chatbot](#part-1-local-ai-chatbot)  
+3. [Part 2: SimpliNote Productivity App](#part-2-simplinote-productivity-app)  
+4. [Screenshots](#screenshots)  
+5. [Simple Terms Explained](#simple-terms-explained)  
+6. [Getting Started](#getting-started)  
+7. [Project Structure](#project-structure)  
+8. [Team & Credits](#team--credits)  
+9. [License](#license)  
+
+---
+
+## 🌈 Why SimpliNote4j?
+
+- 🔒 **Your data stays with you**.  
+  We use **Ollama** for AI on your computer. No external APIs, no surprises.  
+- 🐢 **Lightweight** and **fast**. Works well on average laptops.  
+- 👫 **Dual Power**: Chat with AI and organize your day—all in one place!
+
+---
+
+## 🤖 Part 1: Local AI Chatbot
+
+Our chatbot is like a little robot friend living on your computer. You can:
+
+- 💬 **Chat with AI**  
+  Type messages and get smart replies.  
+- 🖼️ **Upload images**  
+  Show the bot a picture—ask it questions about what it sees!  
+- 🔥 **Runs locally** with **Google’s Gemma 3 4B** model  
+  A “4B” model means it has 4 billion tiny “neurons.” It’s just the right size for your laptop.  
+- 🌡️ **Adjustable temperature**  
+  - **Temperature** controls how creative or predictable the AI is.  
+  - Low = safe, repeatable answers.  
+  - High = wild, creative answers.  
+- 🎛️ **System prompts**  
+  You can set a “system message” to tell the AI how to behave (fun, serious, etc.).  
+- 💾 **Chat memory**  
+  The AI remembers recent messages so it can keep the conversation going.  
+- 🎨 **JavaFX UI**  
+  A simple, clean window to chat—no complicated menus.  
+
+> Everything runs in `User.db`, our little database file that stores **chat history only**.  
+> No user accounts yet—just your friendly chats!
+
+---
+
+## 📒 Part 2: SimpliNote Productivity App
+
+This part is a **group project** by Akshita D., Harshil R., Prithvi S., and me (saltypal). It helps you plan your day easily:
+
+- 📅 **Calendar**  
+  See your month in a neat grid.  
+- ✅ **To-Do List**  
+  Add tasks, set priorities (low ➖, medium ⚡, high 🔥), mark them done.  
+- ⏲️ **Pomodoro Timer**  
+  Work in sprints (25 minutes), then take a break.  
+- 🧠 **Smart Note-Taking** with local AI  
+  Write notes, ask the AI for summaries or insights. All happens on your computer—no cloud needed!
+
+SimpliNote uses **LangChain4j**, a helper library that makes AI features easier to add in Java desktop apps.
+
+---
+
+## 📸 Screenshots
+
+![App Icon](icon.png)  
+*Our cute icon!*
+
+![Chat UI](ai.png)  
+*Chat with AI, ask about images.*
+
+![Calendar View](calendar.png)  
+*Plan your month at a glance.*
+
+![To-Do List](todo.png)  
+*Organize tasks simply.*
+
+![Pomodoro Timer](timer.png)  
+*Stay focused with timed sprints.*
+
+---
+
+## 🍼 Simple Terms Explained
+
+- **Java**: A language we use to write the app’s instructions.  
+- **Maven**: A tool that bundles our code into a neat package (a “.jar suitcase”).  
+- **Ollama**: A little program that runs AI models on your machine.  
+- **LLM** (Large Language Model): A smart robot brain that reads and writes text.  
+- **Gemma 3 4B**: Our chosen brain with “4 billion neurons.”  
+- **Temperature**: A knob for creativity. Low = safe, high = wacky.  
+- **JavaFX**: The toolkit that draws our windows, buttons, and text fields.  
+- **LangChain4j**: A helper library that makes AI chats and memory easy in Java.  
+- **.db file**: A small database on your computer. We use `User.db` to remember your chat history.  
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/saltypal/SimpliNote4j.git
+   cd SimpliNote4j
+   ```
+
+2. **Build with Maven**  
+   - Linux/macOS:
+     ```bash
+     ./mvnw clean package
+     ```
+   - Windows:
+     ```powershell
+     mvnw.cmd clean package
+     ```
+
+3. **Run the App**  
+   ```bash
+   java -jar target/SimpliNote4j-1.0.0.jar
+   ```
+
+That’s it! You now have your AI chatbot and productivity tools running locally.
+
+---
+
+## 📁 Project Structure
+
+```
+SimpliNote4j/
+│
+├─ .gitignore
+├─ pom.xml            # Build instructions for Maven
+├─ mvnw, mvnw.cmd     # Maven helper scripts
+├─ User.db            # Stores chat history
+├─ icon.png, ai.png   # App icons and AI illustrations
+│
+├─ calendar.css       # Styles for calendar
+├─ todo.css           # Styles for to-do list
+├─ timer.css          # Styles for timer
+├─ main.css           # Core styles
+│
+├─ src/
+│  └─ main/
+│     └─ java/        # Java code:
+│         ├─ ChatApp.java       # Main chat application
+│         ├─ MemoryManager.java # Saves and loads chat memory
+│         ├─ AIEngine.java      # Talks to Ollama + Gemma 3 4B
+│         ├─ NoteTaker.java     # Smart note functions
+│         ├─ CalendarView.java  # Calendar UI
+│         ├─ TodoListView.java  # To-do list UI
+│         └─ TimerView.java     # Pomodoro timer UI
+│
+└─ images/             # Extra pictures if needed
+```
+
+---
+
+## 👥 Team & Credits
+
+- **saltypal** – Project lead, Java & LangChain4j 
+- **Akshita Dindukurthi** – Calendar & UI design  
+- **Harshil Reddy** – To-do list & Pomodoro Timer  
+- **Prithvi S** – support
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.  
 Started off as a project for OOP course, We aim to make this project a bigger sucess and contribute in productivity tech.
+Feel free to use, modify, and share!
 
-SimpliNote is written Purely in Java and Uses JavaFX for its User Interface.
+---
 
-### Features of the app:
-- Calendar: User can make plans and add/remove/modify events in the calendar.
-- To do list: User can make list of plans or targets to be accomplished.
-- Timer: The timer uses the pomodoro technique, which the user can use to boost productivity.
-- AI CHAT: The chatbot is developed using Langchain4j and uses ollama inferencing
-
-  
+Thank you for checking out **SimpliNote4j**! 🎉  
+Enjoy your private, local AI assistant and productivity suite!  
