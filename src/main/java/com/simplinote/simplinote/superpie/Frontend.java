@@ -176,7 +176,7 @@ public class Frontend {
     private void setupTemperatureSlider() {
         if (setTemp != null) {
             setTemp.setValue(SP.temperature);
-            setTemp.valueProperty().addListener((_, oldVal, newVal) -> {
+            setTemp.valueProperty().addListener((observable, oldVal, newVal) -> {
                 SP.temperature = newVal.doubleValue();
                 SP.VogueModel();
             });

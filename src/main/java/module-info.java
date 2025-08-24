@@ -19,7 +19,6 @@ module com.simplinote.simplinote {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
     requires javafx.media;
     requires org.apache.pdfbox;
     opens com.simplinote.simplinote to javafx.fxml;
