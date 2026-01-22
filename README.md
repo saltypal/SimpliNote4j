@@ -23,34 +23,33 @@ Everything runs on your own machine. No secrets go to the cloud. Let’s dive in
 
 ---
 
-## 🌈 Why SimpliNote4j?
+##  Why SimpliNote4j?
 
-- 🔒 **Your data stays with you**.  
+- **Your data stays with you**.  
   We use **Ollama** for AI on your computer. No external APIs, no surprises.  
-- 🐢 **Lightweight** and **fast**. Works well on average laptops.  
-- 👫 **Dual Power**: Chat with AI and organize your day—all in one place!
+- **Lightweight** and **fast**. Works well on average laptops.  
 
 ---
 
-## 🤖 Part 1: Local AI Chatbot
+##  Part 1: Local AI Chatbot
 
 Our chatbot is like a little robot friend living on your computer. You can:
 
-- 💬 **Chat with AI**  
+-  **Chat with AI**  
   Type messages and get smart replies.  
-- 🖼️ **Upload images**  
+-  **Upload images**  
   Show the bot a picture—ask it questions about what it sees!  
-- 🔥 **Runs locally** with **Google’s Gemma 3 4B** model  
+-  **Runs locally** with **Google’s Gemma 3 4B** model  
   A “4B” model means it has 4 billion tiny “neurons.” It’s just the right size for your laptop.  
-- 🌡️ **Adjustable temperature**  
+-  **Adjustable temperature**  
   - **Temperature** controls how creative or predictable the AI is.  
   - Low = safe, repeatable answers.  
   - High = wild, creative answers.  
-- 🎛️ **System prompts**  
+-  **System prompts**  
   You can set a “system message” to tell the AI how to behave (fun, serious, etc.).  
-- 💾 **Chat memory**  
+-  **Chat memory**  
   The AI remembers recent messages so it can keep the conversation going.  
-- 🎨 **JavaFX UI**  
+-  **JavaFX UI**  
   A simple, clean window to chat—no complicated menus.  
 
 > Everything runs in `User.db`, our little database file that stores **chat history only**.  
@@ -58,57 +57,24 @@ Our chatbot is like a little robot friend living on your computer. You can:
 
 ---
 
-## 📒 Part 2: SimpliNote Productivity App
+## Part 2: SimpliNote Productivity App
 
 This part is a **group project** by Akshita D., Harshil R., Prithvi S., and me (saltypal). It helps you plan your day easily:
 
-- 📅 **Calendar**  
+-  **Calendar**  
   See your month in a neat grid.  
-- ✅ **To-Do List**  
+-  **To-Do List**  
   Add tasks, set priorities (low ➖, medium ⚡, high 🔥), mark them done.  
-- ⏲️ **Pomodoro Timer**  
+-  **Pomodoro Timer**  
   Work in sprints (25 minutes), then take a break.  
-- 🧠 **Smart Note-Taking** with local AI  
+-  **Smart Note-Taking** with local AI  
   Write notes, ask the AI for summaries or insights. All happens on your computer—no cloud needed!
 
 SimpliNote uses **LangChain4j**, a helper library that makes AI features easier to add in Java desktop apps.
 
 ---
 
-## 📸 Screenshots
-
-![App Icon](icon.png)  
-*Our cute icon!*
-
-![Chat UI](ai.png)  
-*Chat with AI, ask about images.*
-
-![Calendar View](calendar.png)  
-*Plan your month at a glance.*
-
-![To-Do List](todo.png)  
-*Organize tasks simply.*
-
-![Pomodoro Timer](timer.png)  
-*Stay focused with timed sprints.*
-
----
-
-## 🍼 Simple Terms Explained
-
-- **Java**: A language we use to write the app’s instructions.  
-- **Maven**: A tool that bundles our code into a neat package (a “.jar suitcase”).  
-- **Ollama**: A little program that runs AI models on your machine.  
-- **LLM** (Large Language Model): A smart robot brain that reads and writes text.  
-- **Gemma 3 4B**: Our chosen brain with “4 billion neurons.”  
-- **Temperature**: A knob for creativity. Low = safe, high = wacky.  
-- **JavaFX**: The toolkit that draws our windows, buttons, and text fields.  
-- **LangChain4j**: A helper library that makes AI chats and memory easy in Java.  
-- **.db file**: A small database on your computer. We use `User.db` to remember your chat history.  
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repo**  
    ```bash
@@ -135,7 +101,7 @@ That’s it! You now have your AI chatbot and productivity tools running locally
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 SimpliNote4j/
@@ -167,16 +133,16 @@ SimpliNote4j/
 
 ---
 
-## 👥 Team & Credits
+##  Team & Credits
 
 - **saltypal** – Project lead, Java & LangChain4j 
 - **Akshita Dindukurthi** – Calendar & UI design  
 - **Harshil Reddy** – To-do list & Pomodoro Timer  
-- **Prithvi S** – support
+- **Prithvi S** – support 
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the **MIT License**.  
 Started off as a project for OOP course, We aim to make this project a bigger sucess and contribute in productivity tech.
